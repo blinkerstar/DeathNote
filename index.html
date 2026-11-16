@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#050505">
+<meta name="description" content="Rúzzo$ Death Note — acceso y activación de keys.">
+<title>RÚZZO$ DEATH NOTE</title>
+<style>
+:root{color-scheme:dark;--bg:#050505;--surface:#0b0b0b;--surface2:#111;--line:#292929;--text:#f7f7f7;--muted:#929292;--white:#fff;--green:#b7f4cd;--red:#ff9b9b}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:82px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+.wrap{width:min(1080px,calc(100% - 40px));margin:auto}
+header{position:sticky;top:0;z-index:10;background:#050505ed;border-bottom:1px solid #ffffff18;backdrop-filter:blur(14px)}
+.nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:11px;font-size:14px;font-weight:950;letter-spacing:2px}
+.brand-mark{width:34px;height:34px;border:1px solid #666;border-radius:9px;display:grid;place-items:center;font-size:13px;font-weight:950}
+.brand small{display:block;color:#777;font-size:8px;letter-spacing:2.5px;margin-top:3px}
+.navlinks{display:flex;align-items:center;gap:26px;color:#aaa;font-size:12px}
+.navlinks a:hover{color:#fff}
+.nav-cta{border:0;border-radius:0;padding:8px 0;color:#fff!important;background:transparent}
+.menu{display:none;background:transparent;border:0;color:#fff;border-radius:0;padding:9px 0;font-size:14px}
+.hero{padding:100px 0 78px;text-align:center;border-bottom:1px solid #ffffff12}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;color:#bbb;border:1px solid #333;background:#0b0b0b;border-radius:99px;padding:8px 12px;font-size:9px;letter-spacing:2px;text-transform:uppercase}
+.dot{width:6px;height:6px;border-radius:50%;background:#fff;box-shadow:0 0 10px #fff8}
+h1{font-size:clamp(40px,7vw,76px);line-height:.98;letter-spacing:-3.5px;margin:26px 0 18px;font-weight:950}
+h1 span{color:#777}
+.lead{max-width:620px;margin:0 auto;color:var(--muted);font-size:14px;line-height:1.8}
+.hero-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 19px;border:1px solid #555;border-radius:7px;background:#080808;color:#fff;font-size:11px;font-weight:850;letter-spacing:.5px;cursor:pointer;transition:.2s}
+.btn:hover{border-color:#fff;transform:translateY(-1px)}
+.btn.primary{background:#fff;color:#000;border-color:#fff}
+.btn.primary:hover{background:#ddd}
+.section{padding:74px 0;border-bottom:1px solid #ffffff12}
+.section-head{max-width:650px;margin-bottom:27px}
+.kicker{color:#777;font-size:9px;letter-spacing:2.4px;text-transform:uppercase;margin-bottom:12px}
+h2{font-size:clamp(27px,4vw,40px);letter-spacing:-1.5px;margin:0 0 12px}
+.sub{color:var(--muted);font-size:13px;line-height:1.8;margin:0}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.step{border:1px solid var(--line);background:linear-gradient(145deg,#111,#080808);border-radius:12px;padding:22px;min-height:150px}
+.step-num{font-size:10px;letter-spacing:2px;color:#777}
+.step h3{font-size:14px;margin:19px 0 8px}
+.step p{font-size:12px;line-height:1.7;color:#888;margin:0}
+.activate-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:34px;align-items:start}
+.activate-copy{padding-top:12px}
+.activate-copy p{color:var(--muted);font-size:13px;line-height:1.8}
+.activate-card{border:1px solid #383838;background:linear-gradient(145deg,#121212,#080808);border-radius:14px;padding:25px;box-shadow:0 24px 80px #0008}
+.card-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px}
+.card-title{font-size:12px;font-weight:900;letter-spacing:1.4px}
+.card-tag{font-size:9px;letter-spacing:1px;color:#aaa;border:1px solid #3a3a3a;border-radius:99px;padding:6px 9px}
+label{display:block;color:#aaa;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;margin:0 0 9px}
+.key-input{width:100%;height:49px;padding:0 14px;border:1px solid #3c3c3c;border-radius:7px;background:#050505;color:#fff;outline:none;font-size:13px;letter-spacing:.5px}
+.key-input:focus{border-color:#aaa;box-shadow:0 0 0 3px #ffffff0d}
+.key-input::placeholder{color:#555}
+#keyForm .btn{width:100%;margin-top:12px}
+.message{min-height:20px;margin:12px 0 0!important;font-size:11px!important;color:#aaa!important;line-height:1.6}
+.message.error{color:var(--red)!important}
+.message.success{color:var(--green)!important}
+.result{display:none;margin-top:18px;border-top:1px solid #ffffff18;padding-top:18px}
+.result.show{display:block}
+.result-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.result-status{font-size:10px;letter-spacing:1.5px;font-weight:900;color:var(--green)}
+.result-status:before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#b7f4cd;margin-right:8px;vertical-align:1px}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.result-item{border:1px solid #292929;background:#080808;border-radius:8px;padding:12px}
+.result-item small{display:block;color:#777;font-size:9px;letter-spacing:1px;text-transform:uppercase;margin-bottom:7px}
+.result-item strong{font-size:12px;overflow-wrap:anywhere}
+.result-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.result-actions .btn{flex:1}
+footer{padding:25px 0;color:#777;font-size:10px}
+.footer-inner{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.footer-brand{color:#ddd;font-weight:900;letter-spacing:1.4px}
+ 
+#dashboard[hidden]{display:none}
+body.unlocked #inicio,body.unlocked #como-funciona,body.unlocked footer{display:none!important}
+body.unlocked #dashboard{display:block!important}
+body.unlocked header .brand{pointer-events:none}
+body.unlocked header .navlinks{display:none!important}
+body.unlocked header .menu{display:block!important}
+.key-modal{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:20px}
+.key-modal.open{display:flex}
+.modal-backdrop{position:absolute;inset:0;background:#000b;backdrop-filter:blur(12px);animation:fadeIn .22s ease}
+.modal-panel{position:relative;width:min(480px,100%);padding:28px;border:1px solid #383838;border-radius:18px;background:linear-gradient(145deg,#151515f5,#070707f5);box-shadow:0 30px 100px #000b;animation:popIn .24s ease}
+.modal-panel h2{margin:22px 0 10px;font-size:32px;letter-spacing:-1px}
+.modal-panel .sub{margin-bottom:24px}
+.modal-panel #keyForm .btn{width:100%;margin-top:12px}
+.modal-close{position:absolute;right:15px;top:12px;width:34px;height:34px;border:1px solid #333;border-radius:9px;background:#101010;color:#ddd;font-size:22px;cursor:pointer}
+body.modal-open{overflow:hidden}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes popIn{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}
+
+@media(max-width:720px){
+ .navlinks{display:none;position:absolute;top:72px;left:0;right:0;padding:18px 20px;background:#080808;border-bottom:1px solid #333;flex-direction:column;align-items:stretch;gap:17px}
+ .navlinks.open{display:flex}.menu{display:block}
+ .hero{padding:75px 0 60px}h1{letter-spacing:-2.4px}
+ .section{padding:55px 0}.steps{grid-template-columns:1fr}
+ .activate-layout{grid-template-columns:1fr;gap:20px}
+ .activate-card{padding:19px}.result-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:390px){.wrap{width:min(100% - 28px,1080px)}.result-grid{grid-template-columns:1fr}}
+ 
+#dashboard{padding-bottom:105px;min-height:calc(100vh - 72px)}
+.download-list{display:grid;gap:12px}
+.download-card{width:100%;display:flex;align-items:center;gap:14px;text-align:left;padding:18px;border:1px solid #292929;border-radius:15px;background:linear-gradient(145deg,#171717,#0b0b0b);color:#fff;cursor:pointer;transition:.18s}
+.download-card.selected{border-color:#eee;background:#202020;box-shadow:0 0 0 1px #ffffff20}
+.download-icon{width:42px;height:42px;display:grid;place-items:center;flex:0 0 42px;background:transparent;border:0;border-radius:0;font-size:22px}.download-icon.reticle svg{width:34px;height:34px;fill:none;stroke:#f5f5f5;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 3px #ffffff30)}
+.download-info{display:grid;gap:5px;flex:1}.download-info strong{font-size:14px}.download-info small{color:#888;font-size:11px}.download-info .device-meta{color:#aaa;font-size:10px;letter-spacing:.2px}
+.select-mark{font-size:22px;color:#777}.download-card.selected .select-mark{color:#fff}
+.download-cta{position:fixed;z-index:15;bottom:76px;left:20px;right:20px;width:calc(100% - 40px);max-width:1040px;margin:auto;height:62px;border:0;border-radius:16px;background:#f5f5f5;color:#050505;font-size:16px;font-weight:850;cursor:pointer}
+.download-cta:disabled{background:#666;color:#111;cursor:not-allowed}
+.app-tabs{position:fixed;z-index:16;bottom:0;left:0;right:0;height:68px;background:#050505f5;border-top:1px solid #252525;display:flex;justify-content:center;gap:80px;padding-bottom:env(safe-area-inset-bottom);backdrop-filter:blur(14px)}
+.app-tab{min-width:76px;border:0;background:transparent;color:#888;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:11px;cursor:pointer}
+.app-tab svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.app-tab.active{color:#fff}
+.config-list{border:1px solid #292929;border-radius:14px;overflow:hidden;background:#0c0c0c}
+.config-row{display:flex;justify-content:space-between;gap:16px;padding:16px;border-bottom:1px solid #222;align-items:center}.config-row:last-child{border-bottom:0}
+.config-row small{font-size:10px;color:#888;letter-spacing:1px}.config-row strong{font-size:12px;text-align:right;overflow-wrap:anywhere}.active-label{color:#b7f4cd}
+.config-actions{display:flex;gap:10px;margin-top:16px}.config-actions .btn{flex:1}
+
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#inicio" aria-label="Rúzzo$ Death Note inicio">
+      <span class="brand-mark">R$</span>
+      <span>RÚZZO$<small>DEATH NOTE</small></span>
+    </a>
+    <nav class="navlinks" id="navlinks" aria-label="Navegación principal">
+      <a href="#inicio">Inicio</a>
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#activar" class="nav-cta" id="openKeyNav">Activar key</a>
+    </nav>
+    <button class="menu" id="menuBtn" type="button" aria-expanded="false" aria-controls="navlinks">Menú</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="inicio">
+    <div class="wrap">
+      <div class="eyebrow"><span class="dot"></span> SISTEMA DE ACCESO · RÚZZO$</div>
+      <h1>Acceso simple.<br><span>Sin complicaciones.</span></h1>
+      <p class="lead">Introduce tu key para comprobar su estado y consultar la información de tu acceso. Todo desde un solo lugar.</p>
+      <div class="hero-actions">
+        <button class="btn primary" type="button" id="openKeyHero">Activar key</button>
+        <a class="btn" href="#como-funciona">Cómo funciona</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="como-funciona">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">Proceso de activación</div>
+        <h2>Tu acceso, en tres pasos.</h2>
+        <p class="sub">Un proceso directo para verificar tu key y mostrarte el estado que devuelve el servidor.</p>
+      </div>
+      <div class="steps">
+        <article class="step">
+          <div class="step-num">01 / KEY</div>
+          <h3>Introduce tu key</h3>
+          <p>Escribe o pega tu código en el campo de activación.</p>
+        </article>
+        <article class="step">
+          <div class="step-num">02 / VERIFY</div>
+          <h3>Verificación</h3>
+          <p>La solicitud se envía a la API para comprobar la validez y el estado.</p>
+        </article>
+        <article class="step">
+          <div class="step-num">03 / ACCESS</div>
+          <h3>Estado de acceso</h3>
+          <p>Si está activa, verás el plan asociado y la fecha de vencimiento disponible.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="dashboard" hidden>
+    <div class="wrap">
+      <div id="downloadsView">
+        <div class="section-head">
+          <div class="kicker">Acceso desbloqueado</div>
+          <h2>Rúzzo$ Aimbots <span id="dashboardTier">Free</span></h2>
+          <p class="sub">Selecciona un recurso. Tu catálogo aparece únicamente después de validar tu key.</p>
+        </div>
+        <div class="download-list">
+          <button class="download-card" type="button" data-download="aimbot-1">
+            <span class="download-icon reticle"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="13"/><circle cx="24" cy="24" r="3"/><path d="M24 2v10M24 36v10M2 24h10M36 24h10"/></svg></span><span class="download-info"><strong>Aimbot 01</strong><small class="device-meta">Dispositivo: iPhone · iOS: 16+</small></span><span class="select-mark">○</span>
+          </button>
+          <button class="download-card" type="button" data-download="aimbot-2">
+            <span class="download-icon reticle"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="13"/><circle cx="24" cy="24" r="3"/><path d="M24 2v10M24 36v10M2 24h10M36 24h10"/></svg></span><span class="download-info"><strong>Aimbot 02</strong><small class="device-meta">Dispositivo: iPhone · iOS: 16+</small></span><span class="select-mark">○</span>
+          </button>
+          <button class="download-card" type="button" data-download="aimbot-3">
+            <span class="download-icon reticle"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="13"/><circle cx="24" cy="24" r="3"/><path d="M24 2v10M24 36v10M2 24h10M36 24h10"/></svg></span><span class="download-info"><strong>Aimbot 03</strong><small class="device-meta">Dispositivo: iPhone · iOS: 16+</small></span><span class="select-mark">○</span>
+          </button>
+          <button class="download-card" type="button" data-download="aimbot-4">
+            <span class="download-icon reticle"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="13"/><circle cx="24" cy="24" r="3"/><path d="M24 2v10M24 36v10M2 24h10M36 24h10"/></svg></span><span class="download-info"><strong>Aimbot 04</strong><small class="device-meta">Dispositivo: iPhone · iOS: 16+</small></span><span class="select-mark">○</span>
+          </button>
+          <button class="download-card" type="button" data-download="aimbot-5">
+            <span class="download-icon reticle"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="13"/><circle cx="24" cy="24" r="3"/><path d="M24 2v10M24 36v10M2 24h10M36 24h10"/></svg></span><span class="download-info"><strong>Aimbot 05</strong><small class="device-meta">Dispositivo: iPhone · iOS: 16+</small></span><span class="select-mark">○</span>
+          </button>
+          <button class="download-card" type="button" data-download="aimbot-6">
+            <span class="download-icon reticle"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="13"/><circle cx="24" cy="24" r="3"/><path d="M24 2v10M24 36v10M2 24h10M36 24h10"/></svg></span><span class="download-info"><strong>Aimbot 06</strong><small class="device-meta">Dispositivo: iPhone · iOS: 16+</small></span><span class="select-mark">○</span>
+          </button>
+          <button class="download-card" type="button" data-download="aimbot-7">
+            <span class="download-icon reticle"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="13"/><circle cx="24" cy="24" r="3"/><path d="M24 2v10M24 36v10M2 24h10M36 24h10"/></svg></span><span class="download-info"><strong>Aimbot 07</strong><small class="device-meta">Dispositivo: iPhone · iOS: 16+</small></span><span class="select-mark">○</span>
+          </button>
+          <button class="download-card" type="button" data-download="aimbot-8">
+            <span class="download-icon reticle"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="13"/><circle cx="24" cy="24" r="3"/><path d="M24 2v10M24 36v10M2 24h10M36 24h10"/></svg></span><span class="download-info"><strong>Aimbot 08</strong><small class="device-meta">Dispositivo: iPhone · iOS: 16+</small></span><span class="select-mark">○</span>
+          </button>
+          <button class="download-card" type="button" data-download="aimbot-9">
+            <span class="download-icon reticle"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="13"/><circle cx="24" cy="24" r="3"/><path d="M24 2v10M24 36v10M2 24h10M36 24h10"/></svg></span><span class="download-info"><strong>Aimbot 09</strong><small class="device-meta">Dispositivo: iPhone · iOS: 16+</small></span><span class="select-mark">○</span>
+          </button>
+          <button class="download-card" type="button" data-download="aimbot-10">
+            <span class="download-icon reticle"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="13"/><circle cx="24" cy="24" r="3"/><path d="M24 2v10M24 36v10M2 24h10M36 24h10"/></svg></span><span class="download-info"><strong>Aimbot 10</strong><small class="device-meta">Dispositivo: iPhone · iOS: 16+</small></span><span class="select-mark">○</span>
+          </button>
+          <button class="download-card" type="button" data-download="aimbot-11">
+            <span class="download-icon reticle"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="13"/><circle cx="24" cy="24" r="3"/><path d="M24 2v10M24 36v10M2 24h10M36 24h10"/></svg></span><span class="download-info"><strong>Aimbot 11</strong><small class="device-meta">Dispositivo: iPhone · iOS: 16+</small></span><span class="select-mark">○</span>
+          </button>
+          <button class="download-card" type="button" data-download="aimbot-12">
+            <span class="download-icon reticle"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="13"/><circle cx="24" cy="24" r="3"/><path d="M24 2v10M24 36v10M2 24h10M36 24h10"/></svg></span><span class="download-info"><strong>Aimbot 12</strong><small class="device-meta">Dispositivo: iPhone · iOS: 16+</small></span><span class="select-mark">○</span>
+          </button>
+          <button class="download-card" type="button" data-download="aimbot-13">
+            <span class="download-icon reticle"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="13"/><circle cx="24" cy="24" r="3"/><path d="M24 2v10M24 36v10M2 24h10M36 24h10"/></svg></span><span class="download-info"><strong>Aimbot 13</strong><small class="device-meta">Dispositivo: iPhone · iOS: 16+</small></span><span class="select-mark">○</span>
+          </button>
+          <button class="download-card" type="button" data-download="aimbot-14">
+            <span class="download-icon reticle"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="13"/><circle cx="24" cy="24" r="3"/><path d="M24 2v10M24 36v10M2 24h10M36 24h10"/></svg></span><span class="download-info"><strong>Aimbot 14</strong><small class="device-meta">Dispositivo: iPhone · iOS: 16+</small></span><span class="select-mark">○</span>
+          </button>
+          <button class="download-card" type="button" data-download="aimbot-15">
+            <span class="download-icon reticle"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="13"/><circle cx="24" cy="24" r="3"/><path d="M24 2v10M24 36v10M2 24h10M36 24h10"/></svg></span><span class="download-info"><strong>Aimbot 15</strong><small class="device-meta">Dispositivo: iPhone · iOS: 16+</small></span><span class="select-mark">○</span>
+          </button>
+          <button class="download-card" type="button" data-download="aimbot-16">
+            <span class="download-icon reticle"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="13"/><circle cx="24" cy="24" r="3"/><path d="M24 2v10M24 36v10M2 24h10M36 24h10"/></svg></span><span class="download-info"><strong>Aimbot 16</strong><small class="device-meta">Dispositivo: iPhone · iOS: 16+</small></span><span class="select-mark">○</span>
+          </button>
+          <button class="download-card" type="button" data-download="aimbot-17">
+            <span class="download-icon reticle"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="13"/><circle cx="24" cy="24" r="3"/><path d="M24 2v10M24 36v10M2 24h10M36 24h10"/></svg></span><span class="download-info"><strong>Aimbot 17</strong><small class="device-meta">Dispositivo: iPhone · iOS: 16+</small></span><span class="select-mark">○</span>
+          </button>
+          <button class="download-card" type="button" data-download="aimbot-18">
+            <span class="download-icon reticle"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="13"/><circle cx="24" cy="24" r="3"/><path d="M24 2v10M24 36v10M2 24h10M36 24h10"/></svg></span><span class="download-info"><strong>Aimbot 18</strong><small class="device-meta">Dispositivo: iPhone · iOS: 16+</small></span><span class="select-mark">○</span>
+          </button>
+          <button class="download-card" type="button" data-download="aimbot-19">
+            <span class="download-icon reticle"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="13"/><circle cx="24" cy="24" r="3"/><path d="M24 2v10M24 36v10M2 24h10M36 24h10"/></svg></span><span class="download-info"><strong>Aimbot 19</strong><small class="device-meta">Dispositivo: iPhone · iOS: 16+</small></span><span class="select-mark">○</span>
+          </button>
+          <button class="download-card" type="button" data-download="aimbot-20">
+            <span class="download-icon reticle"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="13"/><circle cx="24" cy="24" r="3"/><path d="M24 2v10M24 36v10M2 24h10M36 24h10"/></svg></span><span class="download-info"><strong>Aimbot 20</strong><small class="device-meta">Dispositivo: iPhone · iOS: 16+</small></span><span class="select-mark">○</span>
+          </button>
+        </div>
+        <button class="download-cta" id="downloadCta" type="button" disabled>Selecciona tu descarga</button>
+      </div>
+      <div id="configView" hidden>
+        <div class="section-head"><div class="kicker">Tu cuenta</div><h2>Configuración</h2><p class="sub">Información de tu key y sesión.</p></div>
+        <div class="config-list">
+          <div class="config-row"><small>KEY</small><strong id="configKey">••••</strong></div>
+          <div class="config-row"><small>PLAN</small><strong id="configTier">—</strong></div>
+          <div class="config-row"><small>VENCIMIENTO</small><strong id="configExpiry">—</strong></div>
+          <div class="config-row"><small>DÍAS RESTANTES</small><strong id="configDays">—</strong></div>
+          <div class="config-row"><small>EMITIDA</small><strong id="configIssued">—</strong></div>
+          <div class="config-row"><small>ESTADO</small><strong class="active-label">● Activa</strong></div>
+        </div>
+        <div class="config-actions"><button class="btn" id="configRefresh" type="button">Actualizar key</button><button class="btn" id="configLogout" type="button">Cerrar sesión</button></div>
+      </div>
+    </div>
+    <nav class="app-tabs" aria-label="Navegación de aplicación">
+      <button class="app-tab active" id="tabPrincipal" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10h-6v-7H9v7H3z"/></svg><span>Principal</span></button>
+      <button class="app-tab" id="tabConfig" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm0-6 2 2.1 2.5.6 2.5-1.2 2 2-1.2 2.5.6 2.5L22 12l-2.1 2 .6 2.5 1.2 2.5-2 2-2.5-1.2-2.5.6L12 22l-2-2.1-2.5.6L5 21.7l-2-2 1.2-2.5-.6-2.5L1.5 12l2.1-2-.6-2.5L1.8 5l2-2 2.5 1.2 2.5-.6L12 2Z"/></svg><span>Config</span></button>
+    </nav>
+  </section>
+</main>
+
+<div class="key-modal" id="keyModal" aria-hidden="true">
+  <div class="modal-backdrop" id="modalBackdrop"></div>
+  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="closeKeyModal" aria-label="Cerrar" type="button">×</button>
+    <div class="eyebrow"><span class="dot"></span> RÚZZO$ ACCESS</div>
+    <h2 id="modalTitle">Activar key</h2>
+    <p class="sub">Introduce tu key para desbloquear el catálogo que corresponde a tu acceso.</p>
+    <form id="keyForm" autocomplete="off">
+      <label for="keyInput">Tu key</label>
+      <input class="key-input" id="keyInput" name="key" type="text" placeholder="Pega tu key aquí" autocapitalize="characters" spellcheck="false" required>
+      <button class="btn primary" id="submitKey" type="submit">Verificar y desbloquear</button>
+      <p class="message" id="keyMessage" role="status" aria-live="polite"></p>
+    </form>
+    <div class="result" id="keyResult">
+      <div class="result-head"><strong class="result-status" id="resultStatus">KEY ACTIVA</strong><span class="card-tag" id="resultRole">USUARIO</span></div>
+      <div class="result-grid">
+        <div class="result-item"><small>Plan</small><strong id="resultTier">—</strong></div>
+        <div class="result-item"><small>Key</small><strong id="resultKey">—</strong></div>
+        <div class="result-item"><small>Vencimiento</small><strong id="resultExpiry">—</strong></div>
+        <div class="result-item"><small>Emitida</small><strong id="resultIssued">—</strong></div>
+      </div>
+      <div class="result-actions"><button class="btn" id="refreshKey" type="button">Actualizar estado</button><button class="btn" id="logoutKey" type="button">Cerrar sesión</button></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap footer-inner">
+    <span class="footer-brand">RÚZZO$ DEATH NOTE</span>
+    <span>© <span id="year"></span> · Sistema de acceso</span>
+  </div>
+</footer>
+
+<script>
+/* Se conserva el flujo de validación del HTML original.
+   La API del servidor sigue siendo la autoridad para validar keys. */
+const SITE_CONFIG = {
+  discordUrl: "https://discord.gg/fnE2nwtZzD",
+  supportUrl: "https://discord.gg/fnE2nwtZzD",
+  licenseApiUrl: "https://TU-API-PUBLICA.onrender.com/api/validate",
+  renewalUrl: "https://discord.gg/fnE2nwtZzD"
+};
+
+function normalizeBotExpiry(value) {
+  if (value === null || value === undefined || value === "") return "";
+  const numeric = Number(value);
+  const date = Number.isFinite(numeric) ? new Date(numeric * 1000) : new Date(value);
+  return Number.isNaN(date.getTime()) ? "" : date.toISOString();
+}
+
+async function validateKeyWithBot(key) {
+  const endpoint = SITE_CONFIG.licenseApiUrl;
+  if (!endpoint || /TU-|YOUR_|PLACEHOLDER|REEMPLAZA/i.test(endpoint)) {
+    throw new Error("Falta configurar la URL pública real de la API del bot en SITE_CONFIG. La validación no se puede completar hasta colocar esa URL.");
+  }
+  const response = await fetch(endpoint, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ key: String(key).trim().toUpperCase() })
+  });
+  let result;
+  try { result = await response.json(); }
+  catch { throw new Error("La API del bot no devolvió una respuesta JSON válida."); }
+  if (!response.ok && response.status !== 400) {
+    throw new Error(result?.message || `Error del servidor (${response.status}).`);
+  }
+  return result;
+}
+
+(() => {
+  const $ = id => document.getElementById(id);
+  const form = $("keyForm");
+  const modal = $("keyModal");
+  const openModal = () => { modal.classList.add("open"); modal.setAttribute("aria-hidden","false"); document.body.classList.add("modal-open"); setTimeout(()=>input.focus(),80); };
+  const closeModal = () => { modal.classList.remove("open"); modal.setAttribute("aria-hidden","true"); document.body.classList.remove("modal-open"); };
+  $("openKeyHero").addEventListener("click",openModal);
+  $("openKeyNav").addEventListener("click",e=>{e.preventDefault();openModal();$("navlinks").classList.remove("open");});
+  $("closeKeyModal").addEventListener("click",closeModal);
+  $("modalBackdrop").addEventListener("click",closeModal);
+  document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal();});
+
+
+  const input = $("keyInput");
+  const message = $("keyMessage");
+  const button = $("submitKey");
+  const resultBox = $("keyResult");
+  let currentKey = "";
+  let currentTier = "";
+  let currentExpiry = "";
+  let currentIssued = "";
+
+  const formatDate = value => {
+    if (!value) return "Sin vencimiento informado";
+    const d = new Date(value);
+    return Number.isNaN(d.getTime()) ? "Sin vencimiento informado" : d.toLocaleString();
+  };
+  const setMessage = (text, type = "") => {
+    message.textContent = text || "";
+    message.className = "message" + (type ? " " + type : "");
+  };
+  const showResult = result => {
+    const expiry = normalizeBotExpiry(result.expiresAt);
+    const issued = normalizeBotExpiry(result.issuedAt || result.createdAt || "");
+    const rawTier = String(result.tier || result.plan || result.level || "Free").trim();
+    document.body.classList.add("unlocked");
+    currentTier = /ultra/i.test(rawTier) ? "Ultra" : /vip|premium/i.test(rawTier) ? "VIP" : "Free";
+    currentExpiry = expiry;
+    currentIssued = issued;
+    $("resultTier").textContent = currentTier;
+    $("resultKey").textContent = "••••••••" + currentKey.slice(-4);
+    $("resultExpiry").textContent = formatDate(expiry);
+    $("resultIssued").textContent = issued ? formatDate(issued) : "No informado";
+    $("resultRole").textContent = result.isAdmin === true || String(result.role || "").toLowerCase() === "admin" ? "ADMINISTRADOR" : "USUARIO";
+    $("resultStatus").textContent = "KEY ACTIVA";
+    resultBox.classList.add("show");
+    $("dashboardTier").textContent=currentTier;
+    $("dashboard").hidden=false;
+    $("configKey").textContent="••••••••"+currentKey.slice(-4);
+    $("configTier").textContent=currentTier;
+    $("configExpiry").textContent=formatDate(expiry);
+    $("configIssued").textContent=issued?formatDate(issued):"No informado";
+    const daysLeft=expiry?Math.max(0,Math.ceil((new Date(expiry).getTime()-Date.now())/86400000)):null;
+    $("configDays").textContent=daysLeft===null?"Sin límite informado":daysLeft+" días";
+    closeModal();
+    $("dashboard").scrollIntoView({behavior:"smooth",block:"start"});
+  };
+
+  async function checkKey(key, isRefresh = false) {
+    const normalized = String(key || "").trim().toUpperCase();
+    if (!normalized) {
+      setMessage("Escribe una KEY.", "error");
+      return;
+    }
+    button.disabled = true;
+    $("refreshKey").disabled = true;
+    button.textContent = isRefresh ? "ACTUALIZANDO..." : "VERIFICANDO...";
+    if (isRefresh) setMessage("Actualizando el estado con el servidor...");
+    else setMessage("Verificando con el sistema...");
+    try {
+      const response = await validateKeyWithBot(normalized);
+      if (response?.valid === true && response.status === "active") {
+        currentKey = normalized;
+        showResult(response);
+        setMessage(response.message || "KEY válida y activa.", "success");
+        if (!isRefresh) resultBox.scrollIntoView({behavior:"smooth",block:"nearest"});
+      } else {
+        if (isRefresh) resultBox.classList.remove("show");
+        setMessage(response?.message || "KEY no válida o inactiva.", "error");
+      }
+    } catch (error) {
+      setMessage(error.message || "No se pudo conectar con la API del bot.", "error");
+    } finally {
+      button.disabled = false;
+      $("refreshKey").disabled = false;
+      button.textContent = "Introducir key";
+    }
+  }
+
+  form.addEventListener("submit", event => {
+    event.preventDefault();
+    checkKey(input.value, false);
+  });
+  $("refreshKey").addEventListener("click", () => {
+    if (currentKey) checkKey(currentKey, true);
+  });
+  $("logoutKey")?.addEventListener("click", () => {
+    currentKey = currentTier = currentExpiry = currentIssued = "";
+    input.value = ""; resultBox.classList.remove("show"); $("dashboard").hidden=true;
+    openModal(); setMessage("Sesión cerrada. Puedes introducir otra key."); input.focus();
+  });
+
+  let selectedDownload="";
+  document.querySelectorAll("[data-download]").forEach(card=>card.addEventListener("click",()=>{
+    document.querySelectorAll("[data-download]").forEach(x=>x.classList.remove("selected"));
+    card.classList.add("selected");selectedDownload=card.dataset.download;
+    $("downloadCta").disabled=false;$("downloadCta").textContent="Descargar aimbot";
+  }));
+  const showTab=(which)=>{
+    const config=which==="config";
+    $("downloadsView").hidden=config;$("configView").hidden=!config;
+    $("tabPrincipal").classList.toggle("active",!config);$("tabConfig").classList.toggle("active",config);
+  };
+  $("tabPrincipal").addEventListener("click",()=>showTab("main"));
+  $("tabConfig").addEventListener("click",()=>showTab("config"));
+  $("downloadCta").addEventListener("click",()=>{
+    if(!selectedDownload)return;
+    alert("Falta colocar el enlace real del archivo "+(selectedDownload==="aimbot"?"Aimbot":"Aimbot + ESP")+" en el HTML.");
+  });
+  const logout=()=>{
+    currentKey=currentTier=currentExpiry=currentIssued="";document.body.classList.remove("unlocked");input.value="";
+    resultBox.classList.remove("show");$("dashboard").hidden=true;
+    selectedDownload="";document.querySelectorAll("[data-download]").forEach(x=>x.classList.remove("selected"));
+    $("downloadCta").disabled=true;$("downloadCta").textContent="Selecciona tu descarga";
+    openModal();setMessage("Sesión cerrada. Introduce otra key.");input.focus();
+  };
+  $("configLogout").addEventListener("click",logout);
+  $("configRefresh").addEventListener("click",()=>{if(currentKey)checkKey(currentKey,true)});
+  const menu = $("menuBtn");
+  const nav = $("navlinks");
+  menu.addEventListener("click", () => {
+    const opened = nav.classList.toggle("open");
+    menu.setAttribute("aria-expanded", String(opened));
+  });
+  nav.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
+    nav.classList.remove("open");
+    menu.setAttribute("aria-expanded", "false");
+  }));
+  $("year").textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
