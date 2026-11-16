@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#050505">
+<meta name="description" content="DEATH NOTE — plataforma de acceso, recursos y soporte.">
+<title>DEATH NOTE — Plataforma</title>
+<style>
+:root{--bg:#050505;--panel:#0d0d0d;--panel2:#141414;--line:#292929;--text:#f5f5f5;--muted:#a0a0a0;--white:#fff;--radius:18px;--max:1120px}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:radial-gradient(ellipse at 50% -18%,#30303055,transparent 42%),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+a{color:inherit;text-decoration:none}button,input{font:inherit}button{cursor:pointer}
+.wrap{width:min(var(--max),calc(100% - 36px));margin:auto}
+header{position:sticky;top:0;z-index:20;background:#050505eF;backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:2px}.brand-mark{width:38px;height:38px;border:1px solid #777;border-radius:12px;display:grid;place-items:center;font-size:17px}
+.brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:3px;margin-top:3px}
+.navlinks{display:flex;align-items:center;gap:24px;color:#c7c7c7;font-size:13px}.navlinks a:hover{color:#fff}
+.menu{display:none;background:transparent;color:white;border:1px solid var(--line);border-radius:10px;padding:9px 12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 17px;border:1px solid #444;border-radius:12px;background:#111;color:#fff;font-weight:750;font-size:13px;transition:.2s}
+.btn:hover{background:#202020;border-color:#777;transform:translateY(-1px)}.btn.primary{background:#fff;color:#050505;border-color:#fff}.btn.primary:hover{background:#ddd}
+.hero{padding:92px 0 64px;max-width:790px}.eyebrow,.kicker{font-size:10px;letter-spacing:3px;color:#aaa;font-weight:800;text-transform:uppercase}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:30px;padding:9px 13px}
+.dot{width:6px;height:6px;border-radius:50%;background:#fff;display:inline-block}
+h1{font-size:clamp(48px,8vw,88px);line-height:.98;letter-spacing:-5px;margin:25px 0 20px}h1 span{color:#858585}
+.lead{max-width:620px;color:#aaa;font-size:16px;line-height:1.8}.actions{display:flex;gap:11px;flex-wrap:wrap;margin-top:28px}
+.section{padding:54px 0;border-top:1px solid var(--line)}.section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:24px}
+h2{font-size:clamp(26px,4vw,38px);letter-spacing:-1.5px;margin:10px 0}.sub{color:var(--muted);line-height:1.7;max-width:650px;font-size:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin:0 0 54px}
+.card{background:linear-gradient(145deg,#151515,#090909);border:1px solid var(--line);border-radius:var(--radius);padding:23px}
+.card h3{margin:13px 0 8px;font-size:16px}.card p{color:var(--muted);font-size:13px;line-height:1.7;margin:0}
+.icon{width:36px;height:36px;border:1px solid #444;border-radius:11px;display:grid;place-items:center;color:#fff;font-size:15px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.plan{min-height:190px;display:flex;flex-direction:column;align-items:flex-start}.plan .btn{margin-top:auto}
+.pill{font-size:10px;letter-spacing:1px;color:#bbb;border:1px solid #444;border-radius:30px;padding:6px 9px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+.field{width:100%;height:48px;background:#080808;color:#fff;border:1px solid #383838;border-radius:11px;padding:0 14px;outline:none}.field:focus{border-color:#aaa}
+.row{display:flex;gap:10px;flex-wrap:wrap}.row .field{flex:1;min-width:180px}
+.notice{min-height:22px;color:#bbb;font-size:13px;line-height:1.5}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.tab{border:1px solid #333;background:#0b0b0b;color:#aaa;padding:9px 13px;border-radius:10px;font-size:12px}.tab.active{background:#fff;color:#050505;border-color:#fff}
+.resource-list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.resource{border:1px solid var(--line);border-radius:14px;padding:17px;background:#0b0b0b}.resource strong{display:block;margin-bottom:6px}.resource p{font-size:12px;color:var(--muted);line-height:1.6}.resource a{display:inline-block;margin-top:8px;font-size:12px;text-decoration:underline}
+.hidden{display:none!important}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.step b{font-size:12px;color:#777;letter-spacing:2px}.step h3{margin:10px 0}.step p{color:var(--muted);font-size:13px;line-height:1.7}
+.history{padding-left:18px;color:#bbb;font-size:13px;line-height:2}.empty{border:1px dashed #393939;border-radius:14px;padding:24px;color:#999;text-align:center;font-size:13px}
+footer{border-top:1px solid var(--line);padding:30px 0 45px;color:#888;font-size:12px}.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.modal-backdrop{position:fixed;inset:0;z-index:50;background:#000c;display:none;place-items:center;padding:18px}.modal-backdrop.open{display:grid}.modal{width:min(460px,100%);background:#101010;border:1px solid #444;border-radius:20px;padding:26px;box-shadow:0 25px 90px #000}
+.modal h2{margin:9px 0}.modal p{color:#aaa;font-size:13px;line-height:1.7}.modal form{display:grid;gap:11px}.modal .btn{width:100%}
+.member{display:none}.member.active{display:block}.member-top{display:flex;justify-content:space-between;gap:15px;align-items:center;flex-wrap:wrap}.member-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.stat{background:#080808;border:1px solid #292929;border-radius:13px;padding:16px}.stat small{color:#888;font-size:10px;letter-spacing:1px}.stat strong{display:block;font-size:19px;margin-top:7px}.member-nav{display:flex;gap:7px;flex-wrap:wrap;margin:18px 0}.member-panel{display:none}.member-panel.active{display:block}.account-key-panel{margin-top:12px}.account-key-row{align-items:center}.account-key-row .field{min-width:0}.account-grid{margin-bottom:12px}
+@media(max-width:760px){.menu{display:block}.navlinks{display:none;position:absolute;top:76px;left:0;right:0;background:#090909;border-bottom:1px solid var(--line);padding:18px;flex-direction:column;align-items:flex-start}.navlinks.open{display:flex}.grid3,.cards,.steps{grid-template-columns:1fr}.two{grid-template-columns:1fr}.resource-list{grid-template-columns:1fr}.hero{padding:70px 0 48px}h1{letter-spacing:-3px}.section-head{align-items:flex-start;flex-direction:column}.member-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+<a class="brand" href="#inicio"><span class="brand-mark">DN</span><span>DEATH NOTE<small></small></span></a>
+<button class="menu" id="menuBtn" aria-expanded="false">MENÚ</button>
+<nav class="navlinks" id="navlinks"><a href="#inicio">Inicio</a><a href="#productos">Productos</a><a href="#activar">Activar key</a><a href="#guias">Guías</a><a href="#soporte">Soporte</a></nav>
+</div></header>
+<main class="wrap">
+<section class="hero" id="inicio">
+<div class="eyebrow"><span class="dot"></span> DEATH NOTE</div>
+<h1>DEATH NOTE<br><span>Todo en un solo lugar.</span></h1>
+<p class="lead">Activa tu acceso, consulta tu membresía y encuentra tus recursos y novedades en un solo lugar.</p>
+<div class="actions"><button class="btn primary" id="heroActivate">ACTIVAR MI KEY</button><a class="btn" id="discordLink" href="https://discord.gg/gDJqjWwGvR" target="_blank" rel="noopener noreferrer">SOPORTE DISCORD</a></div>
+</section>
+
+<section class="grid3" aria-label="Funciones principales">
+<article class="card"><div class="icon">01</div><h3>Acceso con key</h3><p>Activa tu acceso de forma sencilla y segura.</p></article>
+<article class="card"><div class="icon">02</div><h3>Catálogo organizado</h3><p>Encuentra el contenido disponible según tu membresía.</p></article>
+<article class="card"><div class="icon">03</div><h3>Panel de usuario</h3><p>Consulta los datos de tu cuenta y tu actividad reciente.</p></article>
+</section>
+
+<section class="section" id="productos">
+<div class="section-head"><div><div class="kicker">CATÁLOGO</div><h2>Explora los planes</h2><p class="sub">Encuentra aquí el contenido disponible para cada membresía.</p></div><span class="pill">FREE / VIP / ULTRA</span></div>
+<div class="cards">
+<article class="card plan"><span class="pill">ACCESO INICIAL</span><h3>FREE</h3><p>Recursos disponibles para el plan gratuito.</p><button class="btn" data-activate>Verificar acceso</button></article>
+<article class="card plan"><span class="pill">MEMBRESÍA</span><h3>VIP</h3><p>Catálogo privado para keys con plan VIP.</p><button class="btn" data-activate>Verificar acceso</button></article>
+<article class="card plan"><span class="pill">MEMBRESÍA</span><h3>ULTRA</h3><p>Catálogo privado para keys con plan Ultra.</p><button class="btn" data-activate>Verificar acceso</button></article>
+</div>
+</section>
+
+<section class="section" id="activar">
+<div class="two">
+<div><div class="kicker">ACTIVACIÓN</div><h2>Activa tu key</h2><p class="sub">Introduce tu key para activar tu membresía. No compartas tu clave con otras personas.</p><button class="btn primary" id="openActivation">ACTIVAR KEY</button></div>
+<div class="panel"><div class="kicker">PROCESO</div><h3>¿Cómo funciona?</h3><p class="sub">1. Introduce tu key.<br>2. Espera la validación.<br>3. Accede a tu panel personal.<br>4. Consulta tu membresía y los recursos disponibles.</p></div>
+</div>
+</section>
+
+<section class="section member" id="memberArea">
+<div class="member-top"><div><div class="kicker">ÁREA PRIVADA</div><h2>Panel DEATH NOTE</h2><p class="sub" id="memberWelcome">Tu sesión de acceso está activa.</p></div><button class="btn" id="logoutBtn">Cerrar sesión</button></div>
+<div class="member-grid">
+<div class="stat"><small>PLAN</small><strong id="memberTier">—</strong></div>
+<div class="stat"><small>ESTADO</small><strong id="memberStatus">ACTIVA</strong></div>
+<div class="stat"><small>VENCIMIENTO</small><strong id="memberExpiry">—</strong></div>
+</div>
+<div class="member-nav"><button class="tab active" data-member-tab="overview">Resumen</button><button class="tab" data-member-tab="resources">Principal</button><button class="tab" data-member-tab="config">Mi cuenta</button><button class="tab" data-member-tab="history">Historial</button></div>
+<div class="member-panel active" id="panel-overview"><div class="panel"><h3>Acceso confirmado</h3><p class="sub">Tu acceso está activo. Desde aquí puedes consultar tu membresía y tus recursos.</p></div></div>
+<div class="member-panel" id="panel-resources"><div class="resource-list" id="mainResources"></div></div>
+<div class="member-panel" id="panel-config">
+  <div class="member-grid account-grid">
+    <div class="stat"><small>PLAN DE TU CUENTA</small><strong id="accountTier">—</strong></div>
+    <div class="stat"><small>ESTADO DE LA KEY</small><strong id="accountStatus">ACTIVA</strong></div>
+    <div class="stat"><small>TIEMPO RESTANTE</small><strong id="accountRemaining">—</strong></div>
+  </div>
+  <div class="panel account-key-panel">
+    <div class="kicker">INFORMACIÓN DE ACCESO</div>
+    <h3>Tu key</h3>
+    <div class="row account-key-row">
+      <input class="field" id="accountKey" type="password" value="" readonly aria-label="Tu key">
+      <button class="btn" id="toggleKey" type="button">Mostrar key</button>
+    </div>
+    <p class="sub" id="accountExpiry">Vencimiento: —</p>
+  </div>
+</div>
+<div class="member-panel" id="panel-history"><div class="panel"><h3>Actividad reciente</h3><ol class="history" id="historyList"><li>Aún no hay actividad registrada.</li></ol></div></div>
+</section>
+
+<section class="section" id="guias"><div class="kicker">CENTRO DE AYUDA</div><h2>Guía rápida</h2><div class="steps">
+<article class="card step"><b>PASO 01</b><h3>Solicita tu acceso</h3><p>Obtén una key por los canales oficiales de DEATH NOTE.</p></article>
+<article class="card step"><b>PASO 02</b><h3>Activa tu key</h3><p>Abre la sección de activación e introduce la key completa.</p></article>
+<article class="card step"><b>PASO 03</b><h3>Consulta tu panel</h3><p>Revisa el plan habilitado y accede a los recursos autorizados que estén publicados.</p></article>
+</div></section>
+
+<section class="section" id="soporte"><div class="two"><div><div class="kicker">SOPORTE</div><h2>¿Necesitas ayuda?</h2><p class="sub">Si tu key no valida o no puedes abrir un recurso, contacta al soporte oficial e incluye el mensaje de error. Nunca envíes contraseñas ni tokens privados.</p><a class="btn primary" id="supportLink" href="https://discord.gg/gDJqjWwGvR" target="_blank" rel="noopener noreferrer">ABRIR DISCORD</a></div><div class="panel"><h3>Problemas frecuentes</h3><p class="sub">• Key incorrecta: revisa que esté escrita completa.<br>• Error de conexión: inténtalo de nuevo más tarde.<br>• Plan no esperado: contacta con soporte para recibir ayuda.</p></div></div></section>
+</main>
+<footer><div class="wrap footer-inner"><span>© <span id="year"></span> DEATH NOTE. Todos los derechos reservados.</span><span>DEATH NOTE</span></div></footer>
+
+<div class="modal-backdrop" id="activationModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+<div class="modal"><div class="kicker">DEATH NOTE / ACCESO</div><h2 id="modalTitle">Activar mi key</h2><p>Introduce tu key para verificarla con el bot.</p><form id="keyForm"><input class="field" id="keyInput" type="text" placeholder="Introduce tu key" autocomplete="off" autocapitalize="characters" required><button class="btn primary" id="submitKey" type="submit">VERIFICAR KEY</button></form><p class="notice" id="keyMessage" role="status" aria-live="polite"></p><button class="btn" id="closeModal">Cerrar</button></div>
+</div>
+<script>
+const SITE_CONFIG = {
+  licenseApiUrl: "https://deathnote-1.onrender.com/api/validate",
+  discordUrl: "https://discord.gg/gDJqjWwGvR"
+};
+
+const RESOURCES = {
+  Free: { main: [] },
+  VIP: { main: [] },
+  Ultra: { main: [] }
+};
+
+const $ = (id) => document.getElementById(id);
+const modal = $("activationModal");
+let currentTier = "";
+let currentKey = "";
+let currentExpiry = null;
+let remainingTimer = null;
+
+function showModal(){
+  $("keyMessage").textContent = "";
+  $("keyInput").value = "";
+  modal.classList.add("open");
+  setTimeout(() => $("keyInput").focus(), 30);
+}
+function closeModal(){ modal.classList.remove("open"); }
+function normalizeExpiry(value){
+  if(value === null || value === undefined || value === "") return "No informada";
+  const n = Number(value);
+  const d = Number.isFinite(n) ? new Date(n * 1000) : new Date(value);
+  return Number.isNaN(d.getTime()) ? "No informada" : d.toLocaleString();
+}
+function expiryDate(value){
+  if(value === null || value === undefined || value === "") return null;
+  if(typeof value === "number" || /^\\d+$/.test(String(value))){
+    const n = Number(value);
+    return new Date(n < 1e12 ? n * 1000 : n);
+  }
+  const d = new Date(value);
+  return Number.isNaN(d.getTime()) ? null : d;
+}
+function updateRemaining(){
+  const target = currentExpiry ? currentExpiry.getTime() : NaN;
+  const el = $("accountRemaining");
+  if(!Number.isFinite(target)){ el.textContent = "No informado"; return; }
+  let ms = target - Date.now();
+  if(ms <= 0){ el.textContent = "Vencida"; $("accountStatus").textContent = "VENCIDA"; return; }
+  const days = Math.floor(ms / 86400000); ms %= 86400000;
+  const hours = Math.floor(ms / 3600000); ms %= 3600000;
+  const minutes = Math.floor(ms / 60000);
+  el.textContent = days ? `${days} d ${hours} h` : `${hours} h ${minutes} min`;
+}
+function renderAccountInfo(){
+  $("accountTier").textContent = currentTier ? currentTier.toUpperCase() : "—";
+  $("accountStatus").textContent = "ACTIVA";
+  $("accountKey").value = currentKey;
+  $("accountKey").type = "password";
+  $("toggleKey").textContent = "Mostrar key";
+  $("accountExpiry").textContent = "Vencimiento: " + normalizeExpiry(currentExpiry ? currentExpiry.getTime() : null);
+  updateRemaining();
+  if(remainingTimer) clearInterval(remainingTimer);
+  remainingTimer = setInterval(updateRemaining, 60000);
+}
+async function validateKeyWithBot(key){
+  const response = await fetch(SITE_CONFIG.licenseApiUrl, {
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({key:String(key).trim().toUpperCase()})
+  });
+  let result;
+  try { result = await response.json(); }
+  catch { throw new Error("El servidor no devolvió una respuesta válida."); }
+  if(!response.ok && response.status !== 400){
+    throw new Error(result?.message || `Error del servidor (${response.status}).`);
+  }
+  return result;
+}
+function recordActivity(message){
+  let items=[];
+  try{items=JSON.parse(localStorage.getItem("deathnote_history")||"[]");}catch{}
+  items.unshift({message, date:new Date().toLocaleString()});
+  items=items.slice(0,20);
+  try{localStorage.setItem("deathnote_history",JSON.stringify(items));}catch{}
+  renderHistory();
+}
+function renderHistory(){
+  let items=[];
+  try{items=JSON.parse(localStorage.getItem("deathnote_history")||"[]");}catch{}
+  $("historyList").innerHTML="";
+  if(!items.length){$("historyList").innerHTML="<li>Aún no hay actividad registrada.</li>";return;}
+  items.forEach(item=>{
+    const li=document.createElement("li");
+    li.textContent=`${item.date} — ${item.message}`;
+    $("historyList").append(li);
+  });
+}
+function renderResources(){
+  const data=RESOURCES[currentTier]||{main:[],config:[]};
+  [["mainResources",data.main]].forEach(([id,items])=>{
+    const root=$(id); root.innerHTML="";
+    if(!items.length){root.innerHTML='<div class="empty">No hay recursos publicados en esta sección todavía.</div>';return;}
+    items.forEach(item=>{
+      const card=document.createElement("article");card.className="resource";
+      const title=document.createElement("strong");title.textContent=item.name||"Recurso";
+      const desc=document.createElement("p");desc.textContent=item.description||"";
+      card.append(title,desc);
+      if(item.url && /^https:\/\/\S+/i.test(item.url)){
+        const link=document.createElement("a");link.href=item.url;link.target="_blank";link.rel="noopener noreferrer";link.textContent="Abrir recurso";card.append(link);
+      }
+      root.append(card);
+    });
+  });
+}
+function openMember(tier, expiry){
+  currentTier=tier;
+  currentExpiry=expiryDate(expiry);
+  $("memberTier").textContent=tier.toUpperCase();
+  $("memberExpiry").textContent=normalizeExpiry(expiry);
+  $("memberStatus").textContent="ACTIVA";
+  $("memberWelcome").textContent="Tu key fue verificada correctamente.";
+  $("memberArea").classList.add("active");
+  renderResources();renderHistory();renderAccountInfo();
+  $("memberArea").scrollIntoView({behavior:"smooth",block:"start"});
+}
+function activateTab(name){
+  document.querySelectorAll("[data-member-tab]").forEach(b=>b.classList.toggle("active",b.dataset.memberTab===name));
+  document.querySelectorAll(".member-panel").forEach(p=>p.classList.toggle("active",p.id==="panel-"+name));
+}
+$("openActivation").addEventListener("click",showModal);
+$("heroActivate").addEventListener("click",showModal);
+document.querySelectorAll("[data-activate]").forEach(b=>b.addEventListener("click",showModal));
+$("closeModal").addEventListener("click",closeModal);
+modal.addEventListener("click",e=>{if(e.target===modal)closeModal();});
+$("keyForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const key=$("keyInput").value.trim().toUpperCase();
+  const button=$("submitKey");
+  if(!key){$("keyMessage").textContent="Escribe tu key.";return;}
+  button.disabled=true;button.textContent="VERIFICANDO...";
+  $("keyMessage").textContent="Verificando tu acceso...";
+  try{
+    const result=await validateKeyWithBot(key);
+    if(result?.valid===true && String(result.status||"").toLowerCase()==="active"){
+      const raw=String(result.tier||result.plan||result.level||"Free");
+      const tier=/ultra/i.test(raw)?"Ultra":/vip|premium/i.test(raw)?"VIP":"Free";
+      currentKey=key;
+      closeModal();
+      openMember(tier,result.expiresAt);
+      recordActivity("Key validada correctamente");
+      $("keyMessage").textContent=result.message||"Key válida.";
+    }else{
+      $("keyMessage").textContent=result?.message||"Key no válida o inactiva.";
+    }
+  }catch(err){
+    $("keyMessage").textContent=err.message||"No se pudo conectar con el bot.";
+  }finally{
+    button.disabled=false;button.textContent="VERIFICAR KEY";
+  }
+});
+document.querySelectorAll("[data-member-tab]").forEach(b=>b.addEventListener("click",()=>activateTab(b.dataset.memberTab)));
+$("toggleKey").addEventListener("click",()=>{
+  const field=$("accountKey");
+  const showing=field.type==="text";
+  field.type=showing?"password":"text";
+  $("toggleKey").textContent=showing?"Mostrar key":"Ocultar key";
+});
+$("logoutBtn").addEventListener("click",()=>{
+  currentKey="";currentTier="";currentExpiry=null;
+  if(remainingTimer) clearInterval(remainingTimer);
+  $("memberArea").classList.remove("active");
+  recordActivity("Sesión cerrada");
+  window.scrollTo({top:0,behavior:"smooth"});
+});
+$("menuBtn").addEventListener("click",()=>{
+  const open=$("navlinks").classList.toggle("open");
+  $("menuBtn").setAttribute("aria-expanded",String(open));
+});
+document.querySelectorAll(".navlinks a").forEach(a=>a.addEventListener("click",()=>$("navlinks").classList.remove("open")));
+$("discordLink").href=SITE_CONFIG.discordUrl;
+$("supportLink").href=SITE_CONFIG.discordUrl;
+$("year").textContent=new Date().getFullYear();
+renderHistory();
+</script>
+</body>
+</html>
