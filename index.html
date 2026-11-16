@@ -194,10 +194,10 @@ body.modal-open{overflow:hidden}
             <span class="download-icon reticle" aria-hidden="true">⌖</span>
             <span class="download-info"><strong>Aim pecho</strong><small class="device-meta">Compatible: iOS 26</small></span>
           </button>
-          <button class="download-card" type="button" data-download="ios26-3">
+         <button class="download-card" type="button" data-download="ios26-2">
             <span class="download-icon reticle" aria-hidden="true">⌖</span>
-            <span class="download-info"><strong>Aim cabeza</strong><small class="device-meta">Compatible: iOS 26</small></span>
-          </button>
+            <span class="download-info"><strong>Aim drag</strong><small class="device-meta">Compatible: iOS 26</small></span>
+         </button>
           <button class="download-card" type="button" data-download="ios26-4">
             <span class="download-icon reticle" aria-hidden="true">⌖</span>
             <span class="download-info"><strong>Balas mágicas</strong><small class="device-meta">Compatible: iOS 26</small></span>
@@ -213,6 +213,10 @@ body.modal-open{overflow:hidden}
           <button class="download-card" type="button" data-download="ios26-7">
             <span class="download-icon reticle" aria-hidden="true">⌖</span>
             <span class="download-info"><strong>Aim cabeza + Antena</strong><small class="device-meta">Compatible: iOS 26</small></span>
+          </button>
+         <button class="download-card" type="button" data-download="ios26-7">
+            <span class="download-icon reticle" aria-hidden="true">⌖</span>
+            <span class="download-info"><strong>Aim drag + Antena</strong><small class="device-meta">Compatible: iOS 26</small></span>
           </button>
           <button class="download-card" type="button" data-download="ios26-8">
             <span class="download-icon reticle" aria-hidden="true">⌖</span>
@@ -449,10 +453,10 @@ async function validateKeyWithBot(key) {
   let selectedDownload="";
   // Pega aquí tus enlaces de descarga para cada opción (MediaFire u otro enlace).
   const DOWNLOAD_LINKS = {
-    "ios26-1": "", "ios26-2": "", "ios26-3": "", "ios26-4": "",
-    "ios26-5": "", "ios26-6": "", "ios26-7": "", "ios26-8": "",
-    "ios27-1": "", "ios27-2": "", "ios27-3": "", "ios27-4": "",
-    "ios27-5": "", "ios27-6": "", "ios27-7": "", "ios27-8": ""
+    "ios26-1": "https://www.mediafire.com/file/x515fdond4lpvnt/Ruzzos+CUELLO+-+ANTENA+FFTH.3105/file", "ios26-2": "https://www.mediafire.com/file/odw3uifkr51yr2m/Ruzzos+PECHO+SN+ANTENA++FFTH.3105/file", "ios26-3": "https://www.mediafire.com/file/12tng2flvoac6ot/Ruzzos+CABEZA+SIN+ANTENA+FFTH.3105/file ", "ios26-4": "", "ios26-5": "https://www.mediafire.com/file/1y2my3pgthpojwh/Ruzzos+DRAG+SIN+ANTENA+FFTH.3105/file",
+    "ios26-6": "https://www.mediafire.com/file/x515fdond4lpvnt/Ruzzos+CUELLO+-+ANTENA+FFTH.3105/file", "ios26-7": "https://www.mediafire.com/file/bxbdr3ahhd1274l/Ruzzos+PECHO+-+ANTENA+FFTH.3105/file", "ios26-8": "https://www.mediafire.com/file/n57t5g8ioo0icfc/Ruzzos+DRAG+-+ANTENA+FFTH.3105/file", "ios26-9": "https://www.mediafire.com/file/sc765mfby0vngje/Ruzzos+CABEZA+-+ANTENA+FFTH.3105/file", "ios26-10": "",
+    "ios27-1": "", "ios27-2": "", "ios27-3": "", "ios27-4": "", "ios27-5": "",
+    "ios27-6": "", "ios27-7": "", "ios27-8": "", "ios27-9": "","ios27-10": ""
   };
   document.querySelectorAll("[data-download]").forEach(card=>card.addEventListener("click",()=>{
     document.querySelectorAll("[data-download]").forEach(x=>x.classList.remove("selected"));
